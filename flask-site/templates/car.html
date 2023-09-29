@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<title>{{name}}</title>
+
+{% block content %}
+
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+{{ post | safe}}
+<ul class="car">
+<h1>{{carname}}</h1>
+<img src="../static/images_html/{{picture}}">
+<p>Название: {{carname}}</p>
+<p>Номерной знак: {{platenumber}}</p>
+<p>Мощность (лс): {{power}}</p>
+<p>Цена (руб/день): {{price}}</p>
+
+{% if status|int() == 1-%}
+<form action="" method="post" class="form-contact">
+    <input name='days' type="number"></inpur>
+<input type="submit" value="Взять в аренду">
+</form>
+{% else -%}
+    <li><p>Машина занята</p></li>
+{% endif %}
+</ul>
+{% endblock -%}

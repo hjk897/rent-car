@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<h2>Машины</h2>
+<p>Для аренды авто нажмите на его название</p>
+<div>
+    {% block cars %}
+    <ul class="cars">
+            {% for c in cars -%}
+                {% if c.carid==5 -%}
+                        <p></p>
+                {% elif c.carid!=5 -%}
+                        <img src="../static/images_html/{{c.picture}}"/>
+                        <li><a href="{{url_for('showCar', alias = c.carid)}}">{{c.carname}}</a></li>
+                {% endif -%}
+            {% endfor -%}
+    </ul>
+    {% endblock %}
+    </div>
+{% endblock -%}

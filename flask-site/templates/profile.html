@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<table border="0" class="profile-table">
+         <tr>
+            <td valign="top" class="profile-panel">
+                   
+                   <ul class="profile-info">
+                   <li>Имя: {{ current_user.getName() }}</li>
+                   <li>Email: {{ current_user.getEmail() }}</li>
+                   <li>Телефон: {{  current_user.getContact()  }}</li>
+                   <a href="{{url_for('logout')}}">Выйти из профиля</a>
+                </ul>
+            </td>
+        </tr>
+</table>
+{% block cars %}
+<ul class="carname">
+    <p>Ваши машины:</p>
+        {% if carname != "" -%}
+        {% for c in carname -%}
+        <li> {{c.carname}}</li>
+            <p>Осталось дней для покатушек: {{c.days}} </p>
+        {% endfor -%}
+        {% endif %}
+</ul>
+{% endblock %}
+{% endblock %}
